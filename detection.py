@@ -1,4 +1,3 @@
-import os
 import imutils
 import cv2
 import dlib
@@ -6,121 +5,120 @@ import time
 import multiprocessing
 from imutils import face_utils
 from scipy.spatial import distance
-from playsound import playsound
-from utilities import eye_aspect_ratio, mouth_aspect_ratio
+
 from notify_run import Notify 
+
 from playsound import playsound
-import matplotlib.pyplot as plt
+from utils import proporcao_dos_olhos, proporcao_da_face
+from playsound import playsound
 
-
-def helper():
+def inicio():
 	
-	# Eyes and mouth threshold value
-	eyeThresh = 0.15
-	mouthThresh = 0.60
+	# Tamanho da abertura dos olhos e posiçåo da face
+	tamanho_do_olho = 0.15
+	tamanho_da_face = 0.60
 
-	# frame to check
-	frame_check_eye = 5
-	frame_check_mouth = 5
+	# Posição do quadro de imagem
+	posicao_do_olho_no_quadro = 5
+	posicao_da_face_no_quadro = 5
 
-	# Initializing the Face Detector object
+    # chama função dentro da biblioteca DLIB
 	detect = dlib.get_frontal_face_detector()
 
-	# Loading the trained model
+	# Modelo treinado com fotos do motorista ( IBM Watson )
 	predict = dlib.shape_predictor("shape_face_lucas_training.dat")
 
-	# Getting the eyes and mouth index
 	(lStart, lEnd) = face_utils.FACIAL_LANDMARKS_68_IDXS["left_eye"]
 	(rStart, rEnd) = face_utils.FACIAL_LANDMARKS_68_IDXS["right_eye"]
-	(mStart, mEnd) = face_utils.FACIAL_LANDMARKS_68_IDXS["mouth"]
+	(mStart, mEnd) = face_utils.FACIAL_LANDMARKS_68_IDXS["face"]
 
-	# Initializing the Video capturing object
+	# captura de video
 	cap=cv2.VideoCapture(0)
 
-	# Initializing the flags for eyes and mouth
-	flag_eye=0
-	flag_mouth=0
+	# marcacao dos olhos e face
+	tamanho_inicial_dos_olhos=0
+	posicao_inicial_da_face=0
 
-	# Calculating the Euclidean distance between facial landmark points of eyes and mouth
+	# calculo da distancia euclideana
 	while True:
-		ret, frame=cap.read()
-		frame = imutils.resize(frame, height = 600, width= 600)
-		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-		subjects = detect(gray, 0)
-		for subject in subjects:
-			shape = predict(gray, subject)
+		ret, quadro=cap.read()
+		quadro = imutils.resize(quadro, height = 600, width= 600)
+		quadro_cinza = cv2.cvtColor(quadro, cv2.COLOR_BGR2quadro_cinza)
+		objetos = detect(quadro_cinza, 0)
+		for objeto in objetos:
+			shape = predict(quadro_cinza, objeto)
 			shape = face_utils.shape_to_np(shape)
-			leftEye = shape[lStart:lEnd]
-			rightEye = shape[rStart:rEnd]
-			mouth = shape[mStart:mEnd]
-			leftEAR = eye_aspect_ratio(leftEye)
-			rightEAR = eye_aspect_ratio(rightEye)
-			ear = (leftEAR + rightEAR) / 2.0
-			leftEyeHull = cv2.convexHull(leftEye)
-			rightEyeHull = cv2.convexHull(rightEye)
-			mar = mouth_aspect_ratio(mouth)
-			mouthHull = cv2.convexHull(mouth)
+			olho_esquerdo = shape[lStart:lEnd]
+			olho_direito = shape[rStart:rEnd]
+			face = shape[mStart:mEnd]
+			esquerdo_EAR = proporcao_dos_olhos(olho_esquerdo)
+			direito_EAR = proporcao_dos_olhos(olho_direito)
+			ear = (esquerdo_EAR + direito_EAR) / 2.0
+			olho_esquerdo_Hull = cv2.convexHull(olho_esquerdo)
+			olho_direito_Hull = cv2.convexHull(olho_direito)
+			face = proporcao_da_face(face)
+			faceHull = cv2.convexHull(face)
 
-			# Drawing the overlay on the face
-			cv2.drawContours(frame, [leftEyeHull], -1, (0, 255, 0), 1)
-			cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
-			cv2.drawContours(frame, [mouth], -1, (255, 255, 255), 1)
-			cv2.putText(frame, "tamanho dos olhos: {}".format(ear), (5, 50),
+			# desenho dos traços na face
+			cv2.drawContours(quadro, [olho_esquerdo_Hull], -1, (0, 255, 0), 1)
+			cv2.drawContours(quadro, [olho_direito_Hull], -1, (0, 255, 0), 1)
+			cv2.drawContours(quadro, [face], -1, (255, 255, 255), 1)
+			cv2.putText(quadro, "tamanho dos olhos: {}".format(ear), (5, 50),
 						cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,0,255), 2)
-			cv2.putText(frame, "tamanho da face: {}".format(mar), (5, 80),
+			cv2.putText(quadro, "tamanho da face: {}".format(face), (5, 80),
 						cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,0,255), 2)
-		
-
 	
-			# Comparing threshold value of Mouth Aspect Ratio (MAR)
-			
-			if mar > mouthThresh:
-				flag_mouth += 1
-				if flag_mouth >= frame_check_mouth:
-					cv2.putText(frame, "****************** RISCO DE ACIDENTE *******************", (10, 370),cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,255), 2)
-					time.sleep(3)
-					p = multiprocessing.Process(target=playsound, args=("Alarm.wav",))
+			# Mensagem de alerta 
+			if face > tamanho_da_face:
+				posicao_inicial_da_face += 1
+				if posicao_inicial_da_face >= posicao_da_face_no_quadro:
+					cv2.putText(quadro, "RISCO DE ACIDENTE ", (10, 370),cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,255), 2)
+					cv2.putText(quadro, "sono {}".format(ear), (5, 50),
+						cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,0,255), 2)
+					time.sleep(10)
+
+					# Dispara um alarme sonoro e alarme visual 
+					p = multiprocessing.Process(target=playsound, args=("Alarme.wav",))
 					p.start()
-					time.sleep(6)
+					time.sleep(4)
 					p.terminate()
+
+					#Envia uma notificação via HTTP
 					notify = Notify()
 					notify.send("AJUDA ! MOTORISTA CAMINHAO 1 COM FADIGA ")
 					
 			else:
-				flag_mouth = 0
+				posicao_inicial_da_face = 0
 
-
-			# Comparing threshold value of Eye Aspect Ratio  (EAR)
-			
-			if ear < eyeThresh:
-				flag_eye += 1
-				if flag_eye >= frame_check_eye:
-					cv2.putText(frame, "******************  MOTORISTA DORMINDO *******************", (10,400),cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-					time.sleep(3)
-					p = multiprocessing.Process(target=playsound, args=("Alarm.wav",))
+			# Comparação do threshold (tamanho_do_olho) com o tamanho dos olhos (ear)
+			if ear < tamanho_do_olho:
+				tamanho_inicial_dos_olhos += 1
+				if tamanho_inicial_dos_olhos >= posicao_do_olho_no_quadro:
+					cv2.putText(quadro, "MOTORISTA DORMINDO ", (10,400),cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+					time.sleep(10)
+					p = multiprocessing.Process(target=playsound, args=("Alarme2.wav",))
 					p.start()
-					time.sleep(6)
+					time.sleep(4)
 					p.terminate()
 					notify = Notify()
 					notify.send("AJUDA ! MOTORISTA CAMINHAO 1 COM RISCO DE ACIDENTE ")
 			else:
-				flag_eye = 0
+				tamanho_inicial_dos_olhos = 0
 		
-		# Plotting the frame
-		cv2.imshow("Frame", frame)
+		# Quadro plotado
+		cv2.imshow("Frame", quadro)
 
-		# Waiting for exit key
+		# Aguardando fim
 		key = cv2.waitKey(1) & 0xFF
 		if key == ord("q"):
 			break
-	
 
-	# Destroying all windows
+	# fechar janelas
 	cv2.destroyAllWindows()
 	cap.stop()
 
 def main():
-	helper()
+	inicio()
 
 if __name__ == '__main__':
 	main()

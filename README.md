@@ -1,5 +1,5 @@
 PROJETO EM DESENVOLVIMENTO ! 
-ABERTO PARA 
+ABERTO PARA AJUDA!!
 ==============================================
 Todos os dias, vemos um número significativo de motoristas se envolvendo em acidentes nas cidades por diversos problemas, dentre eles os relacionados à fadiga. Com essa observância, é válido desenvolver técnicas e sistemas que controlem o número crescente desse tipo de acidente. A Visão Computacional permite a análise de imagens para a extração de informações e, que, com essas informações após filtradas, tratadas e direcionadas pode-se desenvolver ações baseadas nestes aspectos visuais com relação a um motorista objetivando prevenir possíveis problemas associados. Levando isso em consideração, este trabalho estudou técnicas de detecção de olhos, para identificar se os olhos estão abertos ou fechados, indicativos do que pode representar sinais de fadiga ou sonolência. Os algoritmos foram feitos em linguagem de programação Python utilizando como principal a biblioteca OpenCV Este trabalho faz a análise dos resultados alcançados para viabilizar a aplicação deste sistema em equipamentos e veículos necessários.
  
@@ -123,4 +123,3 @@ Utilizaremos o circuito conforme figura 3 para criar a plataforma fisíca para c
 
 
 
- 

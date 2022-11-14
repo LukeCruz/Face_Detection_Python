@@ -20,8 +20,10 @@ Olhos voltados para frente
 
 
 # tecnologias utilizadas
+
 <details>
- ✨Python 3.10.8
+ <sumary><strong> 👨‍ O que você vai usar? <strong></sumary>
+  ✨Python 3.10.8
   OpenCV 4.6.0.66
   Dlib 19.24.0
   imutils 0.5.4
@@ -34,6 +36,8 @@ Olhos voltados para frente
  # Instalação das bibliotecas com python 3 :
   
   <details>
+    <sumary><strong> 👨‍ Bibliotecas e instalação <strong></sumary>
+
   command : 
  
        > pip3 install imutils opencv-python dlib multiprocessing scipy notify-run playsound
@@ -61,6 +65,7 @@ Utilizaremos o circuito conforme figura 3 para criar a plataforma fisíca para c
  # Componentes eletrônicos utilizados
  
  <details>
+   <sumary><strong> 👨‍ Eletrônica <strong></sumary>
  🍪Esp32-cam :
  <img src="./assets/esp32" width="100px" height="100px"/>
  
@@ -84,6 +89,7 @@ Utilizaremos o circuito conforme figura 3 para criar a plataforma fisíca para c
  # Montagem
  
  <details>
+   <sumary><strong> 👨‍ Circuito <strong></sumary>
   <img src="./assets/montagem" width="100px" height="100px"/>
 
  </details>

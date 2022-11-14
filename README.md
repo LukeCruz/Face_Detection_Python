@@ -123,3 +123,18 @@ Utilizaremos o circuito conforme figura 3 para criar a plataforma fisíca para c
 
 
 
+# O que mais você precisa saber ?
+
+  <details>
+   <summary><strong> 👨‍ Informações importantes e arquivos<strong></summary>
+
+TODOS OS ARQUIVOS UTILIZADOS NESTE PROJETO PODEM SER ALTERADOS. 
+ARQUIVOS DE MOTAGEM DE SOFTWARE PODEM MODIFICADOS PARA QUALQUER APLICAÇÃO SEM FINS LUCRATIVOS . 
+
+ESTE É UM PROJETO PARA A COMUNIDADE E NÃO TEM OBJETIVO DE LUCRAR E SIM AJUDAR NO DESENVOLVIMENTO DA SOCIEDADE E DE DESENVOLVEDORES, ENGENHEIROS E ETC.
+
+   Arquivos terminados em .fzz > Utilize o aplicativo Fritizing
+
+   Arquivos terminados em .dwg > Utilize o Autocad 
+
+</details>

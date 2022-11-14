@@ -67,22 +67,22 @@ Utilizaremos o circuito conforme figura 3 para criar a plataforma fisíca para c
  <details>
    <summary><strong> 👨‍ Eletrônica <strong></summary>
  🍪Esp32-cam :
- <img src="./assets/esp32" width="100px" height="100px"/>
+ <img src="./assets/esp32.jpeg" width="100px" height="100px"/>
  
  🍪Conversor FTDI serial/usb RS232 :
-  <img src="./assets/conversor" width="100px" height="100px"/>
+  <img src="./assets/conversor.jpeg" width="100px" height="100px"/>
  
  🍪Motor Ak280 12VDC 89ma :
-  <img src="./assets/motorAk280" width="100px" height="100px"/>
+  <img src="./assets/motorAk280.png" width="100px" height="100px"/>
 
  🍪Bateria 3150mAh 3,6V :
-  <img src="./assets/bateria" width="100px" height="100px"/>
+  <img src="./assets/bateria.jpeg" width="100px" height="100px"/>
 
  🍪Led 5mm 2V :
-  <img src="./assets/led" width="100px" height="100px"/>
+  <img src="./assets/led.jpeg" width="100px" height="100px"/>
 
  🍪Modulo rele 5VDC 1 canal :
- <img src="./assets/rele" width="100px" height="100px"/>
+ <img src="./assets/rele.svg" width="100px" height="100px"/>
 
  </details>
  
@@ -90,6 +90,37 @@ Utilizaremos o circuito conforme figura 3 para criar a plataforma fisíca para c
  
  <details>
    <summary><strong> 👨‍ Circuito <strong></summary>
-  <img src="./assets/montagem" width="100px" height="100px"/>
+  <img src="./assets/montagem.png" width="500px" height="500px"/>
 
  </details>
+
+ # Alimentação esp32-cam
+
+ <details>
+   <summary><strong> 👨‍ Placa esp32-cam <strong></summary>
+   A alimentação da placa esp32-cam pode ser feita pelo conector serial do conversor FTDI conectando os pinos 5v e GND do conversor aos pinos 5v e GND da placa esp32-cam.
+
+   Pode-se utilizar fontes de 5v com até 0,6A ou entradas USB 2.0 ou 3.0 para alimentação.
+
+ </details>
+
+ # alimentação do motor 
+
+  <details>
+   <summary><strong> 👨‍ Banco de baterias <strong></summary>
+
+   A alimentação do motor usado no projeto deve ser externa, pois o esp32-cam não trabalha com tensão nominal de 12v, utilizada pelo motor. 
+   Vamos realizar a ligação em serie de 3 baterias de 3.6v e 3150mAh ( utilize a que melhor lhe atender ) ;
+   
+   Na ligação em serie de baterias , a tensão nominal das baterias é somada e a corrente se mantem a mesma em todo o circuito , neste caso teremos 10.8v e 3150mAh para alimentação do motor.
+  
+  ⚠ Atenção ⚠ Consultar a ligação das baterias no circuito mostrado anteriormente.
+
+
+  <img src="./assets/bateria.svg" width="250px" height="300px"/>
+
+ </details>
+
+
+
+ 

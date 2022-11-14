@@ -16,7 +16,7 @@ Olhos voltados para frente
 
  Motivação : 
  Dados do ministério de infraestrutura brasileiro , apresentam que cerca de 24% dos acidentes são gerados por sono, fadiga ou falta de ateção na direção.
- <img src="./assets/grafico.png" width="300px" height="300px">
+ <img src="./assets/grafico.png" width="500px" height="400px">
 
 
 tecnologias utilizadas :

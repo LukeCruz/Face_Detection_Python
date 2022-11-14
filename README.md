@@ -22,7 +22,7 @@ Olhos voltados para frente
 # tecnologias utilizadas
 
 <details>
- <sumary><strong> 👨‍ O que você vai usar? <strong></sumary>
+ <summary><strong> 👨‍ O que você vai usar? <strong></summary>
   ✨Python 3.10.8
   OpenCV 4.6.0.66
   Dlib 19.24.0
@@ -36,7 +36,7 @@ Olhos voltados para frente
  # Instalação das bibliotecas com python 3 :
   
   <details>
-    <sumary><strong> 👨‍ Bibliotecas e instalação <strong></sumary>
+    <summary><strong> 👨‍ Bibliotecas e instalação <strong></summary>
 
   command : 
  
@@ -65,7 +65,7 @@ Utilizaremos o circuito conforme figura 3 para criar a plataforma fisíca para c
  # Componentes eletrônicos utilizados
  
  <details>
-   <sumary><strong> 👨‍ Eletrônica <strong></sumary>
+   <summary><strong> 👨‍ Eletrônica <strong></summary>
  🍪Esp32-cam :
  <img src="./assets/esp32" width="100px" height="100px"/>
  
@@ -89,7 +89,7 @@ Utilizaremos o circuito conforme figura 3 para criar a plataforma fisíca para c
  # Montagem
  
  <details>
-   <sumary><strong> 👨‍ Circuito <strong></sumary>
+   <summary><strong> 👨‍ Circuito <strong></summary>
   <img src="./assets/montagem" width="100px" height="100px"/>
 
  </details>
